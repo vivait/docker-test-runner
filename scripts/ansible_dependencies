@@ -1,0 +1,2 @@
+#!/bin/sh
+/project/ansible/install-dependencies.sh

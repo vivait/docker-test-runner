@@ -1,0 +1,20 @@
+#!/bin/bash
+files=$(find /var/run/ -type f -name "*.pid" -print)
+
+for file in $files
+do
+    PID=$(<"$file")
+    filename=$(basename -s ".pid" "$file")
+
+    [[ ! -d /proc/$PID ]] && echo -e "\e[32mProcess already dead #$PID\e[0m" && continue;
+    echo -e "\e[1;4mTerminating $filename #$PID\e[0m"
+    kill $PID
+
+    echo "Waiting 5 seconds for PID #$PID"
+    for try in {1..5} ; do
+        [[ ! -d /proc/$PID ]] || [[ -n `grep zombie /proc/$PID/status` ]] && echo -e "\e[32mSuccessfully died\e[0m" && continue 2;
+        sleep 1;
+    done
+
+    echo -e "\e[31mGiving up for #$PID\e[0m"
+done
