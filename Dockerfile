@@ -33,7 +33,6 @@ RUN apt-get install -y --no-install-recommends \
         git \
 && curl https://getcomposer.org/installer | php \
 && mv composer.phar /usr/local/bin/composer
-&& [ "$GITHUB_OAUTH_TOKEN" != ""] && composer config -g github-oauth.github.com $GITHUB_OAUTH_TOKEN
 
 # Install various scripts
 COPY scripts/ .
