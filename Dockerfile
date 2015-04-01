@@ -1,4 +1,4 @@
-# This Dockerfile is used to build an image containing basic stuff to be used as a Jenkins slave build node.
+# This Dockerfile is used to build an image containing basic stuff to be used as a docker test runner
 FROM lewisw/baseimage-docker
 MAINTAINER Lewis Wright <lewis@allwrightythen.com>
 
@@ -29,6 +29,7 @@ ENV DEBCONF_NONINTERACTIVE_SEEN true
 # Install ansible
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
+        eatmydata\
         curl\
         # Install python tools
         python-setuptools\
@@ -59,3 +60,5 @@ COPY init/ /etc/my_init.d/
 RUN chmod +x /etc/my_init.d/*
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+ENTRYPOINT ["/usr/bin/eatmydata", "/sbin/my_init"]
