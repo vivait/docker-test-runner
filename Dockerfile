@@ -2,6 +2,21 @@
 FROM lewisw/baseimage-docker
 MAINTAINER Lewis Wright <lewis@allwrightythen.com>
 
+# this forces dpkg not to call sync() after package extraction and speeds up install
+RUN echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/02apt-speedup
+
+# we don't need an apt cache in a container
+RUN { \
+  aptGetClean='"rm -f /var/cache/apt/archives/*.deb /var/cache/apt/archives/partial/*.deb /var/cache/apt/*.bin || true";'; \
+  echo "DPkg::Post-Invoke { ${aptGetClean} };"; \
+  echo "APT::Update::Post-Invoke { ${aptGetClean} };"; \
+  echo 'Dir::Cache::pkgcache ""; Dir::Cache::srcpkgcache "";'; \
+  echo 'Acquire::http {No-Cache=True;};'; \
+} > /etc/apt/apt.conf.d/no-cache
+
+# and remove the translations, too
+RUN echo 'Acquire::Languages "none";' > /etc/apt/apt.conf.d/no-languages
+
 # Setting ENV HOME does not seem to work currently. HOME is unset in Docker container.
 # See bug : https://github.com/phusion/baseimage-docker/issues/119
 ENV HOME /root
