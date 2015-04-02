@@ -11,12 +11,12 @@ echo "Mounting MySQL with ${MYSQL_RAM_SIZE}MB of RAM."
 
 # Move away old mysql data
 mkdir -p /opt/mysql_backup
-test -d ${MYSQL_DB} && mv ${MYSQL_DB} /opt/mysql_backup
+test -d ${MYSQL_DB} && mv ${MYSQL_DB}/* /opt/mysql_backup
 
 id -u mysql &>/dev/null || useradd mysql
 
 unmount ${MYSQL_DB} 2> /dev/null|| true
-mkdir ${MYSQL_DB} -P && chown mysql ${MYSQL_DB}
+mkdir ${MYSQL_DB} -p && chown mysql ${MYSQL_DB}
 
 mount -v -t tmpfs -o size="${MYSQL_RAM_SIZE}m" tmpfs ${MYSQL_DB}
 
