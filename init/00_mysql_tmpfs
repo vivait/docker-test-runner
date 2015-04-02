@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+set -o xtrace
 
 MYSQL_RAM_SIZE=${MYSQL_RAM_SIZE:-"2048"}
 MYSQL_DB=${MYSQL_DB:-"/var/lib/mysql"}
