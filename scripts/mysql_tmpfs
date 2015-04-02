@@ -9,7 +9,7 @@ echo "Mounting MySQL with ${MYSQL_RAM_SIZE}MB of RAM."
 
 # Move away old mysql data
 mkdir -p /opt/mysql_backup
-mv ${MYSQL_DB} /opt/mysql_backup
+test -d ${MYSQL_DB} && mv ${MYSQL_DB} /opt/mysql_backup
 
 mkdir ${MYSQL_DB}  && chown mysql: ${MYSQL_DB}
 
