@@ -55,8 +55,7 @@ COPY scripts/ .
 RUN chmod +x ansible_* \
  && chmod +x composer_setup \
  && chmod +x graceful_shutdown \
- && chmod +x composer_oauth \
- && chmod +x mysql_tmpfs
+ && chmod +x composer_oauth
 
 COPY init/ /etc/my_init.d/
 RUN chmod +x /etc/my_init.d/*
