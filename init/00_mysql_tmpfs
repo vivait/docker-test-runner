@@ -5,6 +5,8 @@ set -o xtrace
 MYSQL_RAM_SIZE=${MYSQL_RAM_SIZE:-"2048"}
 MYSQL_DB=${MYSQL_DB:-"/var/lib/mysql"}
 
+service stop mysql 2> /dev/null|| true
+
 echo "Mounting MySQL with ${MYSQL_RAM_SIZE}MB of RAM."
 
 # Move away old mysql data
@@ -17,3 +19,5 @@ unmount ${MYSQL_DB} 2> /dev/null|| true
 mkdir ${MYSQL_DB} -P && chown mysql ${MYSQL_DB}
 
 mount -v -t tmpfs -o size="${MYSQL_RAM_SIZE}m" tmpfs ${MYSQL_DB}
+
+mv /opt/mysql_backup/* ${MYSQL_DB}
