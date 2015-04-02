@@ -59,6 +59,8 @@ RUN chmod +x ansible_* \
 COPY init/ /etc/my_init.d/
 RUN chmod +x /etc/my_init.d/*
 
+RUN [ -e github-oauth.token ] && composer config -g github-oauth.github.com `cat github-oauth.token`
+
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENV MYSQL_DB="/var/lib/mysql/" MYSQL_HOME="/mysql"
