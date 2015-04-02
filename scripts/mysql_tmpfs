@@ -14,4 +14,4 @@ test -d ${MYSQL_DB} && mv ${MYSQL_DB} /opt/mysql_backup
 useradd mysql
 mkdir ${MYSQL_DB} && chown mysql ${MYSQL_DB}
 
-mount -t tmpfs -o size="${MYSQL_RAM_SIZE}m" tmpfs ${MYSQL_DB}
+sudo mount -v -t tmpfs -o size="${MYSQL_RAM_SIZE}m" tmpfs ${MYSQL_DB}
