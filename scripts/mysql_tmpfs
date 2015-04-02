@@ -11,6 +11,7 @@ echo "Mounting MySQL with ${MYSQL_RAM_SIZE}MB of RAM."
 mkdir -p /opt/mysql_backup
 test -d ${MYSQL_DB} && mv ${MYSQL_DB} /opt/mysql_backup
 
-mkdir ${MYSQL_DB}  && chown mysql ${MYSQL_DB}
+useradd mysql
+mkdir ${MYSQL_DB} && chown mysql ${MYSQL_DB}
 
 mount -t tmpfs -o size="${MYSQL_RAM_SIZE}m" tmpfs ${MYSQL_DB}
