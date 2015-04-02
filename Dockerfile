@@ -64,6 +64,5 @@ RUN chmod +x /etc/my_init.d/*
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENV MYSQL_DB="/var/lib/mysql/" MYSQL_HOME="/mysql"
-RUN /mysql_tmpfs
 
 ENTRYPOINT ["/usr/bin/eatmydata", "/sbin/my_init"]
