@@ -1,6 +1,4 @@
 #!/bin/sh
 cd /project
 
-[ "$GITHUB_OAUTH_TOKEN" != ""] && composer config -g github-oauth.github.com $GITHUB_OAUTH_TOKEN
-
 composer install --ignore-platform-reqs --no-autoloader --no-scripts --no-plugins --no-progress
