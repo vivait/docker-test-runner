@@ -1,0 +1,3 @@
+#!/bin/bash
+
+[ -f $0 ] && composer config -g github-oauth.github.com `cat $0`
