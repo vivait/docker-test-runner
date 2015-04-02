@@ -3,8 +3,14 @@ set -e
 set -x
 
 MYSQL_RAM_SIZE=${MYSQL_RAM_SIZE:-"2048"}
+MYSQL_DB=${MYSQL_DB:-"/var/lib/mysql"}
 
 echo "Mounting MySQL with ${MYSQL_RAM_SIZE}MB of RAM."
-umount ${MYSQL_DB} 2> /dev/null|| true
-mkdir -p ${MYSQL_DB}
+
+# Move away old mysql data
+mkdir -p /opt/mysql_backup
+mv ${MYSQL_DB} /opt/mysql_backup
+
+mkdir ${MYSQL_DB}  && chown mysql: ${MYSQL_DB}
+
 mount -t tmpfs -o size="${MYSQL_RAM_SIZE}m" tmpfs ${MYSQL_DB}
