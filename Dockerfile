@@ -60,7 +60,7 @@ RUN { \
   echo "APT::Update::Post-Invoke { ${aptGetClean} };"; \
   echo 'Dir::Cache::pkgcache ""; Dir::Cache::srcpkgcache "";'; \
   echo 'Acquire::http { Proxy "http://leeroy.vivait.co.uk:3142"; };'; \
-} > /etc/apt/apt.conf.d/no-cache
+} > /etc/apt/apt.conf.d/no-cache && apt-get update
 
 ENV MYSQL_DB="/var/lib/mysql/" MYSQL_HOME="/mysql"
 
