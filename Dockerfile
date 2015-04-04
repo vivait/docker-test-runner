@@ -5,15 +5,6 @@ MAINTAINER Lewis Wright <lewis@allwrightythen.com>
 # this forces dpkg not to call sync() after package extraction and speeds up install
 RUN echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/02apt-speedup
 
-# we don't need an apt cache in a container
-RUN { \
-  aptGetClean='"rm -f /var/cache/apt/archives/*.deb /var/cache/apt/archives/partial/*.deb /var/cache/apt/*.bin || true";'; \
-  echo "DPkg::Post-Invoke { ${aptGetClean} };"; \
-  echo "APT::Update::Post-Invoke { ${aptGetClean} };"; \
-  echo 'Dir::Cache::pkgcache ""; Dir::Cache::srcpkgcache "";'; \
-  echo 'Acquire::http {No-Cache=True;};'; \
-} > /etc/apt/apt.conf.d/no-cache
-
 # and remove the translations, too
 RUN echo 'Acquire::Languages "none";' > /etc/apt/apt.conf.d/no-languages
 
@@ -61,6 +52,15 @@ COPY init/ /etc/my_init.d/
 RUN chmod +x /etc/my_init.d/*
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# we don't need an apt cache in a container
+RUN { \
+  aptGetClean='"rm -f /var/cache/apt/archives/*.deb /var/cache/apt/archives/partial/*.deb /var/cache/apt/*.bin || true";'; \
+  echo "DPkg::Post-Invoke { ${aptGetClean} };"; \
+  echo "APT::Update::Post-Invoke { ${aptGetClean} };"; \
+  echo 'Dir::Cache::pkgcache ""; Dir::Cache::srcpkgcache "";'; \
+  echo 'Acquire::http { Proxy "http://leeroy.vivait.co.uk:3142"; };'; \
+} > /etc/apt/apt.conf.d/no-cache
 
 ENV MYSQL_DB="/var/lib/mysql/" MYSQL_HOME="/mysql"
 
