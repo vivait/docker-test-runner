@@ -1,3 +1,8 @@
 #!/bin/sh
 cd /project/ansible
-ansible-playbook update.yml -i inventories/build
+
+if [ -z "$ANSIBLE_VERBOSE" ]; then
+    ansible-playbook update.yml -i inventories/build
+else:
+    ansible-playbook update.yml -vvv -i inventories/build
+fi  
