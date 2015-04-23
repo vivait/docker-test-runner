@@ -23,8 +23,7 @@ ENV HOME /root
 # Workaround:
 RUN echo /root > /etc/container_environment/HOME
 
-ENV DEBIAN_FRONTEND noninteractive
-ENV DEBCONF_NONINTERACTIVE_SEEN true
+ENV DEBIAN_FRONTEND="noninteractive" DEBCONF_NONINTERACTIVE_SEEN=true
 
 # Install ansible
 RUN apt-get update \
