@@ -39,8 +39,8 @@ RUN apt-get update \
         software-properties-common\
  && easy_install pip \
  && pip install ansible markupsafe \
- && mkdir -p /usr/share/ansible/plugins/callback_plugins \
- && cd /usr/share/ansible/plugins/callback_plugins \
+ && mkdir -p /usr/share/ansible_plugins/callback_plugins \
+ && cd /usr/share/ansible_plugins/callback_plugins \
  && curl -O https://raw.githubusercontent.com/jlafon/ansible-profile/master/callback_plugins/profile_tasks.py
 # && mkdir /etc/ansible \
 # && echo "[defaults]\nforce_color = 1" > /etc/ansible/ansible.cfg
