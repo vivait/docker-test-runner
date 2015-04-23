@@ -7,6 +7,6 @@ rm -fR ../app/logs > /dev/null 2>&1 &
 
 if [ -z "$ANSIBLE_VERBOSE" ]; then
     ansible-playbook update.yml -i inventories/build --tags "services,shared_directories,always"
-else:
+else
     ansible-playbook update.yml -vvv -i inventories/build --tags "services,shared_directories,always"
 fi  
