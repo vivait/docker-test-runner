@@ -66,4 +66,8 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENV MYSQL_DB="/var/lib/mysql/" MYSQL_HOME="/mysql"
 
+# Use local cache server as an apt-cache
+RUN echo 'Acquire::http { Proxy "http://192.168.1.172:3142"; };' >> /etc/apt/apt.conf.d/00proxy \
+    && apt-get update
+
 ENTRYPOINT ["/usr/bin/eatmydata", "/sbin/my_init"]
