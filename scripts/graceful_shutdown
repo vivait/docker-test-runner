@@ -12,7 +12,12 @@ do
 
     echo "Waiting 5 seconds for PID #$PID"
     for try in {1..5} ; do
-        [[ ! -d /proc/$PID ]] || [[ -n `grep zombie /proc/$PID/status` ]] && echo -e "\e[32mSuccessfully died\e[0m" && continue 2;
+        if [[ ! -d /proc/$PID ]] || [[ -n `grep zombie /proc/$PID/status` ]]
+        then
+            echo -e "\e[32mSuccessfully died\e[0m"
+            rm $file
+            continue 2;
+        fi
         sleep 1;
     done
 
