@@ -52,6 +52,8 @@ RUN apt-get install -y --no-install-recommends \
 && curl https://getcomposer.org/installer | php \
 && mv composer.phar /usr/local/bin/composer
 
+RUN curl -O https://raw.githubusercontent.com/maartenba/phpunit-runner-teamcity/master/phpunit-tc.php
+
 # Install various scripts
 COPY scripts/ .
 RUN chmod +x ansible_* \
