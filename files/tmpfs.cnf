@@ -24,7 +24,10 @@ innodb_large_prefix
 innodb_file_per_table=0
 
 #http://jmuras.com/blog/index.html%3Fp=1608.html
-sync_binlog
+sync_binlog=0
+
+#https://www.percona.com/blog/2013/12/03/innodb_stats_on_metadata-slow-queries-information_schema/
+innodb_stats_on_metadata=0
 
 max_connect_errors       = 1000000
 max_connections          = 350
