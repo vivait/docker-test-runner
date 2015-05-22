@@ -19,5 +19,8 @@ innodb_file_format = Barracuda
 innodb_log_file_size = 2M
 innodb_large_prefix
 
+#Fixes https://www.percona.com/blog/2011/02/03/performance-problem-with-innodb-and-drop-table/
+innodb_file_per_table=0
+
 max_connect_errors       = 1000000
 max_connections          = 350
