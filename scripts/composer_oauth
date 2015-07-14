@@ -1,3 +1,6 @@
 #!/bin/bash
 
 test -f $1 && composer config -g github-oauth.github.com `cat $1`
+
+# Reset the modified time so docker doesn't invalidate the cache
+touch -t 200001010000.00" $1
