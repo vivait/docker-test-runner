@@ -25,6 +25,6 @@ do
 done
 
 echo "Removing apt cache proxy"
-rm /etc/apt/apt.conf.d/01proxy &> /dev/null
+rm -f /etc/apt/apt.conf.d/01proxy &> /dev/null
 
 exit 0;
