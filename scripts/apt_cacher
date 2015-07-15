@@ -1,6 +1,9 @@
 #!/bin/sh
 
-log_daemon_msg "Configuring APT cache proxy" "(based on $0's presence...)"
+if [ -z "$1" ]; then
+    exit 0;
+fi
+
 #ping -c 1 SERVER_NAME_HERE &> /dev/null
 nc $1 3142 < /dev/null
 
@@ -9,4 +12,3 @@ if [ $? = "0" ]; then
 else
   rm /etc/apt/apt.conf.d/01proxy &> /dev/null
 fi
-log_end_msg 0
