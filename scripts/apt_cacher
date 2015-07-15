@@ -12,3 +12,5 @@ if [ $? = "0" ]; then
 else
   rm /etc/apt/apt.conf.d/01proxy &> /dev/null
 fi
+
+exit 0;
