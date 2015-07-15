@@ -15,7 +15,7 @@ do
         if [[ ! -d /proc/$PID ]] || [[ -n `grep zombie /proc/$PID/status` ]]
         then
             echo -e "\e[32mSuccessfully died\e[0m"
-            rm $file
+            rm $file 2>/dev/null 
             continue 2;
         fi
         sleep 1;
@@ -25,6 +25,6 @@ do
 done
 
 echo "Removing apt cache proxy"
-rm -f /etc/apt/apt.conf.d/01proxy &> /dev/null
+rm /etc/apt/apt.conf.d/01proxy 2>/dev/null 
 
 exit 0;
