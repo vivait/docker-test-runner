@@ -1,0 +1,12 @@
+#!/bin/sh
+
+log_daemon_msg "Configuring APT cache proxy" "(based on $0's presence...)"
+#ping -c 1 SERVER_NAME_HERE &> /dev/null
+nc $1 3142 < /dev/null
+
+if [ $? = "0" ]; then
+  echo "Acquire::http::Proxy \"http://$1:3142\";" > /etc/apt/apt.conf.d/01proxy
+else
+  rm /etc/apt/apt.conf.d/01proxy &> /dev/null
+fi
+log_end_msg 0
