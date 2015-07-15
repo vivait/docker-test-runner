@@ -23,3 +23,6 @@ do
 
     echo -e "\e[31mGiving up for #$PID\e[0m"
 done
+
+echo "Removing apt cache proxy"
+rm /etc/apt/apt.conf.d/01proxy &> /dev/null
