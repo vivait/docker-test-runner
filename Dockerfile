@@ -59,6 +59,7 @@ COPY scripts/ .
 RUN chmod +x ansible_* \
  && chmod +x composer_setup \
  && chmod +x graceful_shutdown \
+ && chmod +x apt_cacher \
  && chmod +x composer_oauth
 
 COPY init/ /etc/my_init.d/
