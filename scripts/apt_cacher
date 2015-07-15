@@ -10,7 +10,7 @@ nc $1 3142 < /dev/null
 if [ $? = "0" ]; then
   echo "Acquire::http::Proxy \"http://$1:3142\";" > /etc/apt/apt.conf.d/01proxy
 else
-  rm /etc/apt/apt.conf.d/01proxy &> /dev/null
+  rm -f /etc/apt/apt.conf.d/01proxy &> /dev/null
 fi
 
 exit 0;
