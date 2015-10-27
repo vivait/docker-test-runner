@@ -1,23 +1,28 @@
 #!/bin/bash
 files=$(find /var/run/ -type f -name "*.pid" -print)
+PIDs=()
 
 for file in $files
 do
     PID=$(<"$file")
     filename=$(basename -s ".pid" "$file")
 
-    [[ ! -d /proc/$PID ]] && echo -e "\e[32mProcess already dead #$PID\e[0m" && continue;
+     [ -z "$PID" ] || [[ ! -d /proc/$PID ]] && echo -e "\e[32mProcess already dead #$PID\e[0m" && continue;
     echo -e "\e[1;4mTerminating $filename #$PID\e[0m"
     kill $PID
+    PIDs+=" $PID"
+done
 
-    echo "Waiting 5 seconds for PID #$PID"
+for PID in $PIDs
+do
     for try in {1..5} ; do
         if [[ ! -d /proc/$PID ]] || [[ -n `grep zombie /proc/$PID/status` ]]
         then
-            echo -e "\e[32mSuccessfully died\e[0m"
-            rm $file 2>/dev/null 
+            echo -e "\e[32mSuccessfully killed #$PID\e[0m"
+            rm $file 2>/dev/null
             continue 2;
         fi
+        echo "Try no. $try for PID #$PID"
         sleep 1;
     done
 
@@ -25,6 +30,6 @@ do
 done
 
 echo "Removing apt cache proxy"
-rm /etc/apt/apt.conf.d/01proxy 2>/dev/null 
+rm /etc/apt/apt.conf.d/01proxy 2>/dev/null
 
 exit 0;
