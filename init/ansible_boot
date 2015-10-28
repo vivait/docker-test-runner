@@ -1,12 +1,16 @@
 #!/bin/sh
 cd /project/ansible
 
-# Fixes bug: https://github.com/symfony/symfony/issues/12533
-rm -fR ../app/cache > /dev/null 2>&1 &
-rm -fR ../app/logs > /dev/null 2>&1 &
-
-if [ -z "$ANSIBLE_VERBOSE" ]; then
-    ansible-playbook update.yml -i inventories/build --tags "services,shared_directories,always"
+if [ -z "$NO_SHARED_DIRS" ]; then
+    ansible-playbook update.yml -i inventories/build --tags "services,always"
 else
-    ansible-playbook update.yml -vvv -i inventories/build --tags "services,shared_directories,always"
-fi  
+    # Fixes bug: https://github.com/symfony/symfony/issues/12533
+    rm -fR ../app/cache > /dev/null 2>&1 &
+    rm -fR ../app/logs > /dev/null 2>&1 &
+
+    if [ -z "$ANSIBLE_VERBOSE" ]; then
+        ansible-playbook update.yml -i inventories/build --tags "services,shared_directories,always"
+    else
+        ansible-playbook update.yml -vvv -i inventories/build --tags "services,shared_directories,always"
+    fi  
+fi
