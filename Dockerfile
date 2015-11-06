@@ -37,7 +37,7 @@ RUN apt-get update \
         build-essential\
         software-properties-common\
  && easy_install pip \
- && pip install ansible==1.8.4 markupsafe \
+ && pip install ansible==1.9.3 markupsafe \
  && mkdir -p /usr/share/ansible_plugins/callback_plugins \
  && cd /usr/share/ansible_plugins/callback_plugins \
  && curl -O https://raw.githubusercontent.com/jlafon/ansible-profile/master/callback_plugins/profile_tasks.py \
