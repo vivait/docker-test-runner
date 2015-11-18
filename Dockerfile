@@ -73,6 +73,6 @@ ENV MYSQL_DB="/var/lib/mysql/" MYSQL_HOME="/mysql"
 COPY files/tmpfs.cnf /etc/mysql/conf.d/tmpfs.cnf
 RUN chmod 664 /etc/mysql/conf.d/tmpfs.cnf
 
-RUN pwd && rm -fr /sbin/initctl && ln -s initctl_faker /sbin/initctl
+RUN rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl
 
 ENTRYPOINT ["/usr/bin/eatmydata", "/sbin/my_init"]
