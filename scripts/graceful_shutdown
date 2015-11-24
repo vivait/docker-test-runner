@@ -29,6 +29,11 @@ do
     echo -e "\e[31mGiving up for #$PID\e[0m"
 done
 
+for file in $files
+do
+    rm -fr && echo -e "\e[1;4mRemoved leftover PID file: $filename #$PID\e[0m"
+done
+
 echo "Removing apt cache proxy"
 rm /etc/apt/apt.conf.d/01proxy 2>/dev/null
 
