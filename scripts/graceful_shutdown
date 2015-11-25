@@ -31,7 +31,7 @@ done
 
 for file in $files
 do
-    rm -fr && echo -e "\e[1;4mRemoved leftover PID file: $filename #$PID\e[0m"
+    rm $file && echo -e "\e[1;4mRemoved leftover PID file: $file\e[0m"
 done
 
 echo "Removing apt cache proxy"
