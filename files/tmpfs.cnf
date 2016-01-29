@@ -23,6 +23,10 @@ innodb_large_prefix
 #https://www.percona.com/blog/2011/02/03/performance-problem-with-innodb-and-drop-table/
 innodb_file_per_table=0
 
+skip-locking
+skip-name-resolve
+skip-log-bin
+
 #http://jmuras.com/blog/index.html%3Fp=1608.html
 sync_binlog=0
 
