@@ -2,6 +2,9 @@
 FROM lewisw/baseimage-docker
 MAINTAINER Lewis Wright <lewis@allwrightythen.com>
 
+# Fix Docker's bad handling of spare files
+RUN ln -s /dev/null /var/log/lastlog
+
 # this forces dpkg not to call sync() after package extraction and speeds up install
 RUN echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/02apt-speedup
 
