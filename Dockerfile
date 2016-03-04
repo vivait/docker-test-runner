@@ -44,7 +44,7 @@ RUN apt-get update \
  && pip install ansible==1.9.3 markupsafe \
  && mkdir -p /usr/share/ansible_plugins/callback_plugins \
  && cd /usr/share/ansible_plugins/callback_plugins \
- && curl -O https://raw.githubusercontent.com/jlafon/ansible-profile/master/callback_plugins/profile_tasks.py \
+ && curl -O https://raw.githubusercontent.com/jlafon/ansible-profile/3fa119f29306a319eb414f00de309ea5a2fad0df/callback_plugins/profile_tasks.py \
  && mkdir /etc/ansible \
  && echo "[defaults]\nforce_color = 1" > /etc/ansible/ansible.cfg
 
@@ -56,7 +56,7 @@ RUN apt-get install -y --no-install-recommends \
 && curl https://getcomposer.org/installer | php \
 && mv composer.phar /usr/local/bin/composer
 
-RUN curl -O https://raw.githubusercontent.com/maartenba/phpunit-runner-teamcity/master/phpunit-tc.php
+RUN curl -O https://raw.githubusercontent.com/maartenba/phpunit-runner-teamcity/f225b7d83799d2661793e3bb23ed300943d60c0f/phpunit-tc.php
 
 # Install various scripts
 COPY scripts/ .
