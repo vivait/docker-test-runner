@@ -1,5 +1,5 @@
 # This Dockerfile is used to build an image containing basic stuff to be used as a docker test runner
-FROM lewisw/baseimage-docker
+FROM vivait/baseimage-docker
 MAINTAINER Lewis Wright <lewis@allwrightythen.com>
 
 # Fix Docker's bad handling of spare files
