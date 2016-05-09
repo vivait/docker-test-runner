@@ -1,6 +1,6 @@
 # This Dockerfile is used to build an image containing basic stuff to be used as a docker test runner
 FROM vivait/baseimage-docker
-MAINTAINER Lewis Wright <lewis@allwrightythen.com>
+MAINTAINER Viva IT <enquiry@vivait.co.uk>
 
 # Fix Docker's bad handling of spare files
 RUN rm -f /var/log/lastlog && \
