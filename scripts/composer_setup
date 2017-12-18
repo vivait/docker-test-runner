@@ -1,4 +1,4 @@
 #!/bin/sh
 cd /project
 
-composer install --ignore-platform-reqs --no-autoloader --no-scripts --no-plugins --no-progress
+composer install --ignore-platform-reqs --no-autoloader --no-scripts --no-plugins --no-progress --no-suggest
