@@ -1,5 +1,5 @@
 # This Dockerfile is used to build an image containing basic stuff to be used as a docker test runner
-FROM vivait/baseimage-docker
+FROM docker.vivait.co.uk/baseimage-docker
 MAINTAINER Viva IT <enquiry@vivait.co.uk>
 
 # Fix Docker's bad handling of spare files
