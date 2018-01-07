@@ -79,4 +79,8 @@ RUN chmod 664 /etc/mysql/conf.d/tmpfs.cnf
 
 RUN rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl
 
+#Needed so that www-data can restart worker services in tests
+RUN echo "www-data ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/user && \
+    chmod 0440 /etc/sudoers.d/user
+
 ENTRYPOINT ["/usr/bin/eatmydata", "/sbin/my_init"]
