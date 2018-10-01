@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+if [ "${MYSQL_RAM_SIZE}" -eq "0" ]; then
+   echo "MySQL tmpfs not requested";
+   exit 0;
+fi
+
 MYSQL_RAM_SIZE=${MYSQL_RAM_SIZE:-"512"}
 MYSQL_DB=${MYSQL_DB:-"/var/lib/mysql"}
 
