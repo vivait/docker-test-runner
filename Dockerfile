@@ -28,7 +28,7 @@ ENV HOME /root
 RUN echo /root > /etc/container_environment/HOME
 
 ENV DEBIAN_FRONTEND="noninteractive" DEBCONF_NONINTERACTIVE_SEEN=true
-
+ARG ANSIBLE_VERSION 
 # Install ansible
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
@@ -41,7 +41,7 @@ RUN apt-get update \
         build-essential\
         software-properties-common\
  && easy_install pip \
- && pip install ansible==1.9.3 markupsafe \
+ && pip install ansible==$ANSIBLE_VERSION markupsafe \
  && mkdir -p /usr/share/ansible_plugins/callback_plugins \
  && cd /usr/share/ansible_plugins/callback_plugins \
  && curl -O https://raw.githubusercontent.com/jlafon/ansible-profile/3fa119f29306a319eb414f00de309ea5a2fad0df/callback_plugins/profile_tasks.py \
