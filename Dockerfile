@@ -41,6 +41,7 @@ RUN apt-get update \
         build-essential\
         software-properties-common\
  && easy_install pip \
+ && pip install requests[security] \
  && pip install ansible==$ANSIBLE_VERSION markupsafe \
  && mkdir -p /usr/share/ansible_plugins/callback_plugins \
  && cd /usr/share/ansible_plugins/callback_plugins \
