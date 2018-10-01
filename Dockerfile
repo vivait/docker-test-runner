@@ -28,7 +28,7 @@ ENV HOME /root
 RUN echo /root > /etc/container_environment/HOME
 
 ENV DEBIAN_FRONTEND="noninteractive" DEBCONF_NONINTERACTIVE_SEEN=true
-ARG ANSIBLE_VERSION 
+ARG ANSIBLE_VERSION=1.9.6
 # Install ansible
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
