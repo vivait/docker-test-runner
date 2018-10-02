@@ -1,5 +1,5 @@
 # This Dockerfile is used to build an image containing basic stuff to be used as a docker test runner
-FROM docker.vivait.co.uk/baseimage-docker
+FROM phusion/baseimage
 MAINTAINER Viva IT <enquiry@vivait.co.uk>
 
 # Fix Docker's bad handling of spare files
@@ -32,8 +32,9 @@ ARG ANSIBLE_VERSION=2.5.6
 # Install ansible
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
-        eatmydata\
-        curl\
+        eatmydata \
+        curl \
+        sudo \
         # Install python tools
         python-setuptools\
         python-dev\
@@ -51,8 +52,8 @@ RUN apt-get update \
 
 RUN apt-get install -y --no-install-recommends \
         # Install PHP tools
-        php5-cli \
-        php5-curl \
+        php7.0-cli \
+        php7.0-curl \
         git \
 && curl https://getcomposer.org/installer | php \
 && mv composer.phar /usr/local/bin/composer
@@ -79,9 +80,7 @@ COPY files/tmpfs.cnf /etc/mysql/conf.d/tmpfs.cnf
 RUN chmod 664 /etc/mysql/conf.d/tmpfs.cnf
 
 RUN rm -fr /sbin/initctl && ln -s /initctl_faker /sbin/initctl
-
 #Needed so that www-data can restart worker services in tests
-RUN echo "www-data ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/user && \
-    chmod 0440 /etc/sudoers.d/user
+RUN sudo usermod -aG sudo www-data
 
 ENTRYPOINT ["/usr/bin/eatmydata", "/sbin/my_init"]
