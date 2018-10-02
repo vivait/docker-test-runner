@@ -34,6 +34,7 @@ RUN apt-get update \
  && apt-get install -y --no-install-recommends \
         eatmydata \
         curl \
+        netcat \
         sudo \
         # Install python tools
         python-setuptools\
